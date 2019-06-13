@@ -1,5 +1,5 @@
 FROM alpine:3.9
-LABEL maintainer "Adrian B. Danieli - https://github.com/sickp"
+LABEL maintainer="Adrian B. Danieli - https://github.com/sickp"
 
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
