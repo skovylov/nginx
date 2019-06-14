@@ -1,10 +1,6 @@
 FROM alpine:3.9
 LABEL maintainer="SVK [https://github.com/skovylov/nginx]"
 
-EXPOSE 80 443
-CMD ["nginx", "-g", "daemon off;"]
-
-
 ENV NGX_BUILD /usr/src/nginx
 ENV NGINX_VERSION 1.16.0
 ENV NAXSI_VER 0.56
@@ -15,6 +11,8 @@ ENV NGX_STICKY 1.2.6
 
 ENV LUAJIT_LIB=/usr/lib
 ENV LUAJIT_INC=/usr/include/luajit-2.1
+
+COPY nginxrun.sh /
 
 RUN set -ex \
   && apk add --no-cache \
@@ -134,9 +132,13 @@ RUN set -ex \
   && apk add --no-cache tzdata \
   && rm -rf /tmp/* \
   && rm -rf $NGX_BUILD \
-  && mkdir -p /etc/nginx/conf.d/{base,http,sites}
+  && mkdir -p /etc/nginx/conf.d/{base,http,sites} \
+  && chmod +x /nginxrun.sh
 
 COPY nginx.conf /etc/nginx/
 COPY http.conf /etc/nginx/conf.d/http/
 COPY base.conf /etc/nginx/conf.d/base/
 COPY default.conf /etc/nginx/conf.d/sites/
+
+EXPOSE 80 443
+CMD ["/nginxrun.sh"]

@@ -25,6 +25,15 @@ By default, nginx.conf designed to allow user manages almost all options.
 
 Such structure has been chosen to have flexibility in configuration of nginx without need to edit nginx.conf itself.
 
+## Timezone definition
+By default no timezone selected and system uses __UTC__. To set correct timezone you need to use __NGINX_TZ__ environment variable.
+```bash
+docker run \
+-e NGINX_TZ="Europe/Moscow"
+skovylov/nginx:latest
+```
+This will set Moscow timezone as default to container.
+
 ## Usage 
 First of all, you need to create configs in directories above. After that you need to mount config directory inside container
 ```bash
