@@ -15,7 +15,7 @@ This project aimed to create docker nginx with additional modules.
 ## Brief description
 
 By default, nginx.conf designed to allow user manages almost all options.
-###Here is a structure of conf.d directory:
+##### Here is a structure of conf.d directory:
 - __conf.d/base/*.conf__
 > This directory contains files for global nginx configurations (users, events etc.)
 - __conf.d/http/*.conf__
